@@ -7,4 +7,10 @@
 
 ## Admin site 
 ### Superuser 
-- Người dùng có tất cả quyền trên trang
+- Người dùng có tất cả quyền trên trang (admin)
+
+## Making web page 
+- Bao gồm 3 stage : 
+    1. Định nghĩa URL : what to look for when matching a browser request with as site URL 
+    2. Writing view : URL map to a particular view, view function retrieves and process the data needed for that page 
+    3. writing template : view function often render the page using a template 

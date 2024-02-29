@@ -40,4 +40,5 @@ class Entry(models.Model):
         verbose_name_plural = 'entries'
     # which infor to show when refers to individual entries
     def __str__(self):
+        if len(self.text < 50) : return self.text
         return f"{self.text[:50]}..."

@@ -15,10 +15,12 @@ Including another URLconf
 """
 # Which page to build in response to browser  requests
 
-
+# import module và function để quản lý URLS cho admin site 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
+# define the urlpatterns variable, includes sets of URLS from the apps in the project.
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls), # defines all the urls that can be requested from the admin site
+    path('', include('learning_logs.urls')), # add line to include the module learning_logs.urls 
 ]
