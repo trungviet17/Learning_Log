@@ -22,3 +22,7 @@
 ## GET / POST request 
 - GET request : cho việc hiện thị dữ liệu từ server 
 - POST request : sử dụng khi người dùng muốn submit thông tin qua form 
+
+## Login / Logout 
+- Sử dụng module django.contrib.auth với các hàm login, logout được build sẵn, có sẵn các template
+- Có sẵn đối tượng user 
