@@ -33,7 +33,7 @@ class Entry(models.Model):
 
     # Text field doesn't need a size limit 
     text = models.TextField()
-    data_added = models.DateTimeField(auto_now_add = True) 
+    date_added = models.DateTimeField(auto_now_add = True) 
 
     # allows us to set a special att telling Django to use Entries when it needs to multiple entries
     class Meta: 

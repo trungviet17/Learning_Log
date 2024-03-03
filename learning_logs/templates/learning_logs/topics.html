@@ -11,7 +11,9 @@
         <!-- tag equivalent to a for loop which loop through the list topics from the context dictionary -->
         {% for topic in topics %}
             <!-- to print a  variable in a template, wrap the variabel name in double braces, it indicate Django to us a template variable -->
-            <li>{{topic}}</li>
+            <li> 
+                <a href = "{% url 'learning_logs:topic' topic.id %}"> {{topic}} </a> 
+            </li>
         <!-- tell Django what to do if no items in the list -->
         {% empty %}
             <li>No topics yet</li>
