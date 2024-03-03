@@ -8,7 +8,7 @@ from django.shortcuts import render, redirect
 # import topic trong model 
 from .models import Topic 
 
-from .forms import TopicForm
+from .forms import TopicForm, EntryForm
 # Create your views here.
 
 def index(request): 
@@ -67,3 +67,26 @@ def new_topic(request)  :
     # display a blank or invalid form 
     context = {'form' : form }
     return render(request, 'learning_logs/new_topic.html', context)    
+
+def new_entry(request, topic_id): 
+    """Add new entry for a particular topic"""
+
+    topic = Topic.objects.get(id = topic_id)
+
+    if request.method != 'POST': 
+        form = EntryForm()
+
+    else : 
+        form = EntryForm(data=request.POST)
+        if form.is_valid():
+            # create new entry but not save it into database
+            new_entry = form.save(commit=False)
+            # assign the created object to the topic
+            new_entry.topic = topic
+            # now we can save it into the database
+            new_entry.save()
+            
+            return  redirect('learning_logs:topic',  topic_id = topic_id) 
+        
+    context = {"topic": topic ,'form' : form} 
+    return render(request, 'learning_logs/new_entry.html', context=context)  
