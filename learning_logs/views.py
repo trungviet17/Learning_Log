@@ -6,7 +6,7 @@
 from django.shortcuts import render, redirect
 
 # import topic trong model 
-from .models import Topic 
+from .models import Topic, Entry
 
 from .forms import TopicForm, EntryForm
 # Create your views here.
@@ -66,7 +66,9 @@ def new_topic(request)  :
 
     # display a blank or invalid form 
     context = {'form' : form }
-    return render(request, 'learning_logs/new_topic.html', context)    
+    return render(request, 'learning_logs/new_topic.html', context)  
+
+
 
 def new_entry(request, topic_id): 
     """Add new entry for a particular topic"""
@@ -85,8 +87,32 @@ def new_entry(request, topic_id):
             new_entry.topic = topic
             # now we can save it into the database
             new_entry.save()
-            
+
             return  redirect('learning_logs:topic',  topic_id = topic_id) 
         
     context = {"topic": topic ,'form' : form} 
     return render(request, 'learning_logs/new_entry.html', context=context)  
+
+
+"""
+- GET request: Return a form for editing the entry 
+- POST request: saves the modifiled text into the database 
+"""
+def edit_entry(request, entry_id) : 
+    """Edit an existing entry"""
+    entry = Entry.objects.get(id = entry_id)
+    topic = entry.topic
+
+    if request.method != 'POST': 
+        # create a form instance based on the information associated with the existing entry object
+        form = EntryForm(instance=entry)
+    else : 
+        # update data  in the database 
+        form = EntryForm(instance= entry, data =  request.POST)
+        if form.is_valid(): 
+            form.save()
+            return redirect('learning_logs:topic', topic_id = topic.id )
+    context = {'entry': entry, 'topic': topic, 'form': form}
+    return render(request,'learning_logs/edit_entry.html', context)
+
+    
