@@ -4,6 +4,7 @@
 
 
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 
 # import topic trong model 
 from .models import Topic, Entry
@@ -15,17 +16,21 @@ def index(request):
     """The home page for learning logs"""
     return render(request, 'learning_logs/index.html')
 
+@login_required
 # request object Django received from the server and all associated entries from  the database 
 def topics(request): 
     """Show all the topics."""
     # query the database 
-    topics = Topic.objects.order_by('date_added')
+    # tell django to retrieve only the Topic object from the database whose owner attribute matches the current user
+    topics = Topic.objects.filter(owner = request.user).order_by('date_added')
     # define the context that we'll send to the template 
     context = {'topics' : topics}
 
     return render(request, 'learning_logs/topics.html', context)
 
 # request object for specific page 
+@login_required
+# check whether a user is logged in -> runs if they are else redirected to the login page
 def topic(request, topic_id): 
     # retrieve the topic
     topic = Topic.objects.get(id = topic_id ) 
@@ -48,7 +53,7 @@ def topic(request, topic_id):
     3. When user has filled up on the request 
 '''
 
-
+@login_required
 def new_topic(request)  : 
     '''Add new topic'''
     if request.method != 'POST': 
@@ -69,7 +74,7 @@ def new_topic(request)  :
     return render(request, 'learning_logs/new_topic.html', context)  
 
 
-
+@login_required
 def new_entry(request, topic_id): 
     """Add new entry for a particular topic"""
 
@@ -98,6 +103,7 @@ def new_entry(request, topic_id):
 - GET request: Return a form for editing the entry 
 - POST request: saves the modifiled text into the database 
 """
+@login_required
 def edit_entry(request, entry_id) : 
     """Edit an existing entry"""
     entry = Entry.objects.get(id = entry_id)
@@ -115,4 +121,3 @@ def edit_entry(request, entry_id) :
     context = {'entry': entry, 'topic': topic, 'form': form}
     return render(request,'learning_logs/edit_entry.html', context)
 
-    

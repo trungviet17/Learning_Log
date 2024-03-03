@@ -12,7 +12,7 @@
         <!-- default URL patter for logging out -->
         <a href="{% url 'users:logout' %}">Log out</a>
     {% else %} 
-        <a href ="{% url 'users:login' %}">Log in</a>
+        <a href ="{% url 'users:login' %}">Log in</a> - 
         <a href = "{% url 'users:register' %}" >Register</a>
     {% endif %}
     

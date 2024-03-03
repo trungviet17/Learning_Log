@@ -26,3 +26,6 @@
 ## Login / Logout 
 - Sử dụng module django.contrib.auth với các hàm login, logout được build sẵn, có sẵn các template
 - Có sẵn đối tượng user 
+
+##  Decorator 
+@login_required : Hàm decorator này kiểm tra xem người dùng đã đăng nhập hay chưa
