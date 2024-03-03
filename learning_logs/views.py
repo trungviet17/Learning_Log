@@ -5,6 +5,7 @@
 
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.http import Http404
 
 # import topic trong model 
 from .models import Topic, Entry
@@ -37,6 +38,8 @@ def topic(request, topic_id):
     # get entry objects associated with this
     entries = topic.entry_set.order_by('-date_added') # get all Entry objects related with this topic
 
+    # make sure topic belongs to the current user
+    if topic.owner != request.user: raise Http404
     # create a list of dictionaries containing each entry and its author
     context = {'topic' : topic, 'entries' : entries}
 
@@ -65,7 +68,10 @@ def new_topic(request)  :
         # check all require field have been filled in
         if form.is_valid() : 
             # write data from the the form to the database 
-            form.save()
+            # associated  topic with particular user
+            new_topic = form.save(commit= False)
+            new_topic.owner = request.user
+            new_topic.save()
             # redirect the user's browser to the topics page, where the user should see the topic they just entered in the list of topic
             return redirect('learning_logs:topics')
 
