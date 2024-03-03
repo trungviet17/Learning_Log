@@ -18,3 +18,7 @@
 
 ## Thiết kế webpage 
 - Thiết kế theo dạng kế thừa từ file base.html 
+
+## GET / POST request 
+- GET request : cho việc hiện thị dữ liệu từ server 
+- POST request : sử dụng khi người dùng muốn submit thông tin qua form 
