@@ -16,4 +16,6 @@ urlpatterns = [
     # third argument in path provide the name that we use instead of writing out a URL
     path('', views.index, name='index'),
 
+    # Page show all topic 
+    path('topics/', views.topics, name = 'topics')
 ]

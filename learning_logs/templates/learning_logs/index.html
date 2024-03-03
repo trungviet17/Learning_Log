@@ -1,4 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-  <p> Learning Log</p>
-  <p>Learning logs helps you keep track of your learning, for any topic you're learning about</p>
+<!-- Learning Log section -->
+<!-- Inheriting from a parent template -->
+{% extends "learning_logs/base.html" %}
+
+<!-- Define the content block -->
+{% block content  %}
+
+    <p> Learning Log</p>
+    <p>Learning logs helps you keep track of your learning, for any topic you're learning about</p>
+
+<!-- Indicate finished defining the content-->
+{% endblock content %}

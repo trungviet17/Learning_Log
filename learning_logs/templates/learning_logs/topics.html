@@ -1,0 +1,22 @@
+
+<!-- inherit from base.html -->
+<!-- This file show the topic page, which display the general topics  -->
+
+{% extends "learning_logs/base.html" %}
+
+{% block content %}
+    <p>Topics</p>
+
+    <ul>
+        <!-- tag equivalent to a for loop which loop through the list topics from the context dictionary -->
+        {% for topic in topics %}
+            <!-- to print a  variable in a template, wrap the variabel name in double braces, it indicate Django to us a template variable -->
+            <li>{{topic}}</li>
+        <!-- tell Django what to do if no items in the list -->
+        {% empty %}
+            <li>No topics yet</li>
+        {% endfor %}
+
+    </ul>
+
+{% endblock content %}

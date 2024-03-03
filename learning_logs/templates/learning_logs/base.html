@@ -1,0 +1,12 @@
+<!-- This is a Django template file. It is used to generate HTML content dynamically based on the data provided by the view. -->
+
+<!-- The following line of code creates a hyperlink that navigates to the 'index' page of the 'learning_logs' app. -->
+<p> 
+    <!-- Add the dash after 1 -->
+    <a href="{% url 'learning_logs:index' %}">Learning log</a> - 
+    <!-- tell django to generate a link matching the url patterns with the name 'topics' -->
+    <a href= "{% url 'learning_logs:topics' %}" > Topics</a>
+</p>
+
+<!-- This block of code is used to define the main content of the template. -->
+{% block content %}{% endblock content %}
