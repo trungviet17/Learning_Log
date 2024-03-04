@@ -4,23 +4,30 @@
 
 {% extends "learning_logs/base.html" %}
 
+<!-- Don't use any custom bootstrap4 template tags in this file -->
+{%  block page_header %}
+    <h1>Topics</h1>
+
+{% endblock page_header %}
+
+
 {% block content %}
-    <p>Topics</p>
+   
 
     <ul>
         <!-- tag equivalent to a for loop which loop through the list topics from the context dictionary -->
         {% for topic in topics %}
             <!-- to print a  variable in a template, wrap the variabel name in double braces, it indicate Django to us a template variable -->
-            <li> 
+            <li> <h3>
                 <a href = "{% url 'learning_logs:topic' topic.id %}"> {{topic}} </a> 
-            </li>
+            </h3></li>
         <!-- tell Django what to do if no items in the list -->
         {% empty %}
-            <li>No topics yet</li>
+            <li><h3> No topics yet </h3></li>
         {% endfor %}
 
     </ul>
 
-    <a href = "{% url 'learning_logs:new_topic' %}">Add a new topic</a>
+    <h3><a href = "{% url 'learning_logs:new_topic' %}">Add a new topic</a></h3>
 
 {% endblock content %}
